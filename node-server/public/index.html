@@ -415,7 +415,7 @@
                         statusMsg.textContent = `Pipeline fault: ${message}`;
                         setTimeout(() => {
                             alert("Critical operational parsing layout exception occurred: " + message);
-                            window.location.reload();
+                            // window.location.reload();
                         }, 1000);
                         return;
                     }

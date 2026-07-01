@@ -5,6 +5,8 @@ import { fileURLToPath } from "url";
 import fetch from "node-fetch";
 import Razorpay from "razorpay";
 import * as archiver from "archiver";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
@@ -13,11 +15,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ENV config
-const PYTHON_API_BASE = process.env.PYTHON_API_BASE || "http://localhost:8000";
+const PYTHON_API_BASE = process.env.PYTHON_API_BASE;
 
 // Razorpay keys
-const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID || "rzp_test_T8BksBmVIvLQRR";
-const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET || "yi06o37ZlUn2kIp6tQMU0hez";
+const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID;
+const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET;
 
 // Middleware
 app.use(cors());
