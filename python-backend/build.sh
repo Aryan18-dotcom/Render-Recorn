@@ -6,4 +6,4 @@ set -o errexit
 pip install -r requirements.txt
 
 # 2. Install ONLY the browser binaries (no root privileges requested)
-playwright install chromium
+python -m playwright install chromium
