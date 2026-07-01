@@ -13,7 +13,8 @@ class MarkdownSpecGenerator:
             self.client = Groq(api_key=api_key)
             # Use a currently available Groq model (check Groq console if this changes)
             # See: https://console.groq.com/docs/text-chat
-            self.model_name = "openai/gpt-oss-120b"
+            groq_model = os.getenv("GROQ_MODEL_NAME", "openai/gpt-oss-120b")
+            self.model_name = groq_model
 
             print("[Generator] Initialized Groq client and model successfully.")
         except Exception as e:
