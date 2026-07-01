@@ -1,0 +1,9 @@
+groq
+python-dotenv
+beautifulsoup4
+playwright
+lxml
+colorama
+cssutils
+fastapi
+uvicorn

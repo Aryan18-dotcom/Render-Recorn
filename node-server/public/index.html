@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic document setup -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary SEO title -->
+    <title>Render Recorn – Reverse Engineer Any Website Frontend into Specs</title>
+
+    <!-- Meta description: keep ~50–160 chars -->
+    <meta name="description"
+        content="Render Recorn converts any website URL into structured architecture, design tokens, and usecase specs for developers and product teams." />
+
+    <!-- Primary keyword / topic (not very important for Google, but harmless) -->
+    <meta name="keywords"
+        content="website reverse engineering, frontend blueprint, UI specs generator, architecture markdown, design tokens, usecase matrix" />
+
+    <!-- Canonical URL (update to your real production URL) -->
+    <link rel="canonical" href="https://www.RenderRecorn/" />
+
+    <!-- Robots: index and follow (default, but explicit is fine) -->
+    <meta name="robots" content="index,follow" />
+    <meta name="googlebot" content="index,follow" />
+
+    <!-- Language and author (optional but nice) -->
+    <meta name="language" content="en" />
+    <meta name="author" content="Aryan Chheda" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Render Recorn" />
+    <meta property="og:title" content="Render Recorn – Reverse-Engineer Any Website Frontend" />
+    <meta property="og:description"
+        content="Paste a URL and get production-ready markdown specs: structure.md, design.md, and usecase.md." />
+    <meta property="og:url" content="https://www.RenderRecorn/" />
+    <!-- Update this to a real absolute image URL (1200x630 recommended) -->
+    <meta property="og:image" content="./Og-Image.png" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@RenderRecorn" />
+    <meta name="twitter:title" content="Render Recorn – Reverse-Engineer Any Website Frontend" />
+    <meta name="twitter:description"
+        content="Turn any public URL into architecture, design, and usecase markdown bundles." />
+    <meta name="twitter:image" content="./Og-Image.png" />
+
+    <!-- Theme color for mobile address bar -->
+    <meta name="theme-color" content="#05080f" />
+
+    <!-- Favicon / app icons (update hrefs to match your build) -->
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon.svg" />
+
+    <!-- Basic JSON-LD schema for a SaaS product -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Render Recorn",
+    "operatingSystem": "Web",
+    "applicationCategory": "DeveloperApplication",
+    "description": "Render Recorn reverse-engineers any public website frontend into structured specifications: structure, design tokens, and usecase flows.",
+    "url": "https://www.RenderRecorn/",
+    "image": "./Og-Image.png",
+    "offers": {
+      "@type": "Offer",
+      "price": "1000.00",
+      "priceCurrency": "INR"
+    }
+  }
+  </script>
+
+    <!-- Tailwind + fonts + scripts (your existing ones) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#05080f',
+                        glassBg: 'rgba(15, 23, 42, 0.45)',
+                        glassBorder: 'rgba(255, 255, 255, 0.08)',
+                        brandPrimary: '#4f46e5',
+                        brandSuccess: '#22c55e'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #05080f;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-nav {
+            background: rgba(5, 8, 15, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .glow-effect {
+            position: relative;
+        }
+
+        .glow-effect::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .glow-effect:hover::after {
+            opacity: 1;
+        }
+
+        .canvas-container::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .canvas-container::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .canvas-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .canvas-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body class="text-slate-100 antialiased selection:bg-transparent h-screen w-screen flex flex-col overflow-hidden">
+
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-[40%] -left-[20%] w-[80vw] h-[80vw] bg-indigo-900/15 rounded-full blur-[120px]"></div>
+        <div class="absolute -bottom-[30%] -right-[10%] w-[70vw] h-[70vw] bg-emerald-900/10 rounded-full blur-[120px]">
+        </div>
+    </div>
+
+    <header class="glass-nav sticky top-0 left-0 right-0 z-50 h-16 flex-shrink-0">
+        <div class="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.reload()">
+                <div
+                    class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <span
+                    class="font-bold text-base sm:text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400">Render Recorn</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-6 text-xs sm:text-sm">
+                <a href="#features" class="text-slate-400 hover:text-white transition-colors">Features</a>
+                <a href="#how-it-works" class="text-slate-400 hover:text-white transition-colors">Architecture</a>
+                <a href="#pricing" class="text-slate-400 hover:text-white transition-colors">Pricing</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-1 min-h-0 relative z-10 overflow-hidden">
+
+        <section id="view-landing"
+            class="h-full max-w-7xl mx-auto px-4 py-4 md:py-8 flex flex-col lg:flex-row items-center gap-8 overflow-hidden">
+            <div class="flex-1 space-y-4 min-w-0">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-panel border-indigo-500/20 text-xs font-medium text-indigo-400">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                    Next-Gen Deconstruction Engine
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1] text-white">
+                    Reverse-Engineer <br>
+                    <span
+                        class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-violet-400 to-emerald-400">Any
+                        Frontend Blueprint</span>
+                </h1>
+                <p class="text-sm sm:text-base text-slate-400 max-w-xl leading-relaxed">
+                    Transform any public URL into production-ready specifications: architecture, design tokens, and
+                    usecase flows, powered by localized crawlers and deep LLM reasoners.
+                </p>
+
+                <form id="generate-form" class="generate-form max-w-xl space-y-4">
+                    <div
+                        class="relative rounded-2xl glass-panel p-2 flex items-center shadow-2xl transition-all duration-300 focus-within:border-indigo-500/50">
+                        <div class="pl-3 text-slate-500 hidden sm:block">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                            </svg>
+                        </div>
+                        <input type="url" id="target-url" name="target-url" placeholder="https://example.com" required
+                            class="w-full bg-transparent border-0 outline-none focus:ring-0 text-white placeholder-slate-500 px-3 py-2 text-sm sm:text-base" />
+                        <button type="submit" id="generate-btn"
+                            class="glow-effect bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs text-sm px-4 sm:px-6 py-2.5 rounded-xl transition-all shadow-lg shadow-indigo-600/20 whitespace-nowrap ml-2">
+                            Create One Now!
+                        </button>
+                    </div>
+                </form>
+
+                <div id="features" class="grid grid-cols-3 gap-3 max-w-xl pt-2 text-xs sm:text-sm">
+                    <div class="p-3 rounded-xl glass-panel text-center">
+                        <div class="text-[10px] sm:text-xs font-semibold text-slate-400 mb-1">Structure Specs</div>
+                        <div class="text-sm sm:text-lg font-mono text-indigo-400 font-bold truncate">structure.md</div>
+                    </div>
+                    <div class="p-3 rounded-xl glass-panel text-center">
+                        <div class="text-[10px] sm:text-xs font-semibold text-slate-400 mb-1">Design System</div>
+                        <div class="text-sm sm:text-lg font-mono text-violet-400 font-bold truncate">design.md</div>
+                    </div>
+                    <div class="p-3 rounded-xl glass-panel text-center">
+                        <div class="text-[10px] sm:text-xs font-semibold text-slate-400 mb-1">Usecase Matrix</div>
+                        <div class="text-sm sm:text-lg font-mono text-emerald-400 font-bold truncate">usecase.md</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-1 w-full lg:w-auto relative hidden lg:block overflow-hidden h-full max-h-[360px]">
+                <div
+                    class="w-full h-full rounded-2xl glass-panel p-6 shadow-2xl relative overflow-hidden border-white/10">
+                    <div class="flex items-center gap-2 mb-4 border-b border-white/5 pb-4">
+                        <div class="w-3 h-3 rounded-full bg-red-500/60"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/60"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/60"></div>
+                        <div class="text-xs font-mono text-slate-500 ml-4 truncate">agent_runtime_manifest.json</div>
+                    </div>
+                    <div class="space-y-3 font-mono text-[11px] text-indigo-300/80">
+                        <p class="text-slate-500">// Executing deep asset tracking extraction...</p>
+                        <p><span class="text-emerald-400">✓</span> DOM Tree structural hydration node mapped.</p>
+                        <p><span class="text-emerald-400">✓</span> Computed layout tokens extracted (43 declarations
+                            found).</p>
+                        <p><span class="text-emerald-400">✓</span> Forms, routes, and operational events captured
+                            successfully.</p>
+                        <div class="p-4 rounded-lg bg-slate-950/60 border border-white/5 mt-4 space-y-2">
+                            <div class="h-2 w-2/3 bg-slate-800 rounded"></div>
+                            <div class="h-2 w-1/2 bg-slate-800 rounded"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-processing"
+            class="hidden fixed inset-0 z-50 bg-darkBg flex flex-col items-center justify-center p-6">
+            <div class="max-w-lg w-full text-center space-y-6">
+                <div class="relative w-24 h-24 mx-auto">
+                    <div class="absolute inset-0 rounded-full border-4 border-indigo-500/20"></div>
+                    <div
+                        class="absolute inset-0 rounded-full border-4 border-transparent border-t-indigo-500 animate-spin">
+                    </div>
+                    <div class="absolute inset-3 rounded-full border-4 border-transparent border-b-emerald-400 animate-spin"
+                        style="animation-direction: reverse; animation-duration: 1.5s;"></div>
+                </div>
+                <div class="space-y-2">
+                    <h2 class="text-xl font-bold tracking-tight text-white">Analyzing Target Endpoint</h2>
+                    <p id="processing-status-msg" class="text-slate-400 font-mono text-xs sm:text-sm">Initializing
+                        headless asset crawler cluster...</p>
+                </div>
+                <div
+                    class="glass-panel rounded-2xl p-4 text-left font-mono text-xs space-y-2.5 max-h-[140px] overflow-y-auto text-slate-400 border-white/5">
+                    <div class="flex items-center gap-2" id="log-step-1">
+                        <span class="status-icon text-indigo-400">●</span><span class="log-text">Resolving cross-origin
+                            client parameters...</span>
+                    </div>
+                    <div class="flex items-center gap-2 opacity-40" id="log-step-2">
+                        <span class="status-icon">○</span><span class="log-text">Parsing structural DOM layouts &
+                            interactive tree...</span>
+                    </div>
+                    <div class="flex items-center gap-2 opacity-40" id="log-step-3">
+                        <span class="status-icon">○</span><span class="log-text">Running Groq LLM inference system
+                            architectures...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-results"
+            class="hidden h-full max-w-7xl mx-auto px-4 py-4 flex flex-col gap-3 overflow-hidden">
+            <!-- Header -->
+            <div class="flex items-center justify-between border-b border-white/5 pb-2 flex-shrink-0">
+                <div class="min-w-0">
+                    <h2 class="text-xl font-bold text-white tracking-tight truncate">
+                        Generated Blueprint Specifications
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-0.5">
+                        Rendered on secure sandbox canvas frames.
+                    </p>
+                </div>
+                <div
+                    class="hidden sm:flex text-xs font-mono text-amber-400 bg-amber-500/10 px-3 py-1.5 rounded-lg border border-amber-500/20 items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m0 0v2m0-2h2m-2 0H10m3.5-6.538a2.42 2.42 0 010 3.414l-6.264 6.264a2 2 0 01-.707.414l-3.364.841a.5.5 0 01-.607-.607l.841-3.364a2 2 0 01.414-.707l6.264-6.264a2 2 0 013.414 0z" />
+                    </svg>
+                    Selection & Clipboard Protections Enabled
+                </div>
+            </div>
+
+            <!-- Tabs + Pay button row -->
+            <div
+                class="flex flex-col md:flex-row items-stretch md:items-center md:justify-between gap-2 p-1 rounded-xl glass-panel border-white/5 text-xs flex-shrink-0 w-full">
+                <div class="flex items-center justify-center gap-2 w-full md:w-auto">
+                    <button onclick="switchTab('structure')" id="tab-btn-structure"
+                        class="px-4 py-2 rounded-lg font-medium transition-all bg-indigo-600 text-white">
+                        structure.md
+                    </button>
+                    <button onclick="switchTab('design')" id="tab-btn-design"
+                        class="px-4 py-2 rounded-lg font-medium transition-all text-slate-400 hover:text-white">
+                        design.md
+                    </button>
+                    <button onclick="switchTab('usecase')" id="tab-btn-usecase"
+                        class="px-4 py-2 rounded-lg font-medium transition-all text-slate-400 hover:text-white">
+                        usecase.md
+                    </button>
+                </div>
+
+                <button id="upgrade-btn"
+                    class="glow-effect bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm px-6 py-2 rounded-xl transition-all shadow-lg shadow-emerald-600/20 w-full md:w-60 lg:w-fit">
+                    Pay ₹1,000 &amp; Download ZIP
+                </button>
+            </div>
+            <p class="text-[10px] font-mono text-slate-500" id="payment-status">Payment status will be displayed here.
+            </p>
+            <!-- Canvas area -->
+            <div class="glass-panel rounded-2xl p-4 border-white/10 flex-1 min-h-0 relative">
+                <div id="canvas-container-structure"
+                    class="canvas-container w-full h-full overflow-auto bg-slate-950/60 rounded-xl p-4 border border-black/40">
+                    <canvas id="canvas-structure" class="block"></canvas>
+                </div>
+                <div id="canvas-container-design"
+                    class="canvas-container w-full h-full overflow-auto bg-slate-950/60 rounded-xl p-4 border border-black/40 hidden">
+                    <canvas id="canvas-design" class="block"></canvas>
+                </div>
+                <div id="canvas-container-usecase"
+                    class="canvas-container w-full h-full overflow-auto bg-slate-950/60 rounded-xl p-4 border border-black/40 hidden">
+                    <canvas id="canvas-usecase" class="block"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let generatedSpecCache = { structure_md: "", design_md: "", usecase_md: "" };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("generate-form");
+            const urlInput = document.getElementById("target-url");
+            const viewLanding = document.getElementById("view-landing");
+            const viewProcessing = document.getElementById("view-processing");
+            const viewResults = document.getElementById("view-results");
+            const statusMsg = document.getElementById("processing-status-msg");
+            const upgradeBtn = document.getElementById("upgrade-btn");
+            const paymentStatusEl = document.getElementById("payment-status");
+
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const targetUrl = urlInput.value.trim();
+                if (!targetUrl) return;
+
+                gsap.to(viewLanding, {
+                    opacity: 0, duration: 0.3, onComplete: () => {
+                        viewLanding.classList.add("hidden");
+                        viewProcessing.classList.remove("hidden");
+                        gsap.fromTo(viewProcessing, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+                    }
+                });
+
+                runLiveLogSequence();
+
+                try {
+                    const res = await fetch("/api/generate", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ target_url: targetUrl }),
+                    });
+
+                    const data = await res.json().catch(() => null);
+
+                    if (!res.ok) {
+                        const message = (data && (data.error || data.details)) || `Downstream gateway error (${res.status})`;
+                        statusMsg.textContent = `Pipeline fault: ${message}`;
+                        setTimeout(() => {
+                            alert("Critical operational parsing layout exception occurred: " + message);
+                            window.location.reload();
+                        }, 1000);
+                        return;
+                    }
+
+                    generatedSpecCache.structure_md = data.structure_md || "# Structure specification missing.";
+                    generatedSpecCache.design_md = data.design_md || "# Design specification missing.";
+                    generatedSpecCache.usecase_md = data.usecase_md || "# Usecase specification missing.";
+
+                    statusMsg.textContent = "Data received. Preparing secure canvas frames...";
+
+                    renderMarkdownToCanvas("canvas-structure", generatedSpecCache.structure_md);
+                    renderMarkdownToCanvas("canvas-design", generatedSpecCache.design_md);
+                    renderMarkdownToCanvas("canvas-usecase", generatedSpecCache.usecase_md);
+
+                    setTimeout(() => {
+                        gsap.to(viewProcessing, {
+                            opacity: 0, duration: 0.3, onComplete: () => {
+                                viewProcessing.classList.add("hidden");
+                                viewResults.classList.remove("hidden");
+                                gsap.fromTo(viewResults, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4 });
+                            }
+                        });
+                    }, 600);
+                } catch (err) {
+                    console.error(err);
+                    statusMsg.textContent = "Unexpected runtime exception occurred.";
+                    setTimeout(() => {
+                        alert("Critical operational parsing layout exception occurred: " + (err.message || "Unknown"));
+                        window.location.reload();
+                    }, 1200);
+                }
+            });
+
+            function runLiveLogSequence() {
+                const logs = [
+                    { id: "log-step-1", text: "Connecting headless clusters to target...", delay: 0 },
+                    { id: "log-step-2", text: "Pulling semantic target nodes and assets...", delay: 1200 },
+                    { id: "log-step-3", text: "Compiling markdown layers inside system...", delay: 2400 }
+                ];
+
+                logs.forEach(log => {
+                    setTimeout(() => {
+                        const row = document.getElementById(log.id);
+                        if (row) {
+                            row.classList.remove("opacity-40");
+                            row.querySelector(".status-icon").textContent = "✓";
+                            row.querySelector(".status-icon").classList.add("text-emerald-400");
+                            statusMsg.textContent = log.text;
+                        }
+                    }, log.delay);
+                });
+            }
+
+            upgradeBtn.addEventListener("click", async () => {
+                paymentStatusEl.textContent = "Negotiating handshake routing parameters...";
+                try {
+                    const res = await fetch("/api/create-order", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ amount: 100000, currency: "INR" }),
+                    });
+
+                    const order = await res.json().catch(() => null);
+                    if (!res.ok || !order) {
+                        throw new Error((order && order.error) || "Order signature response generation failed.");
+                    }
+
+                    const options = {
+                        key: order.keyId,
+                        amount: order.amount,
+                        currency: order.currency,
+                        name: "Render Recorn Pro Bundle",
+                        description: "Offline Specifications Zip Download Pack",
+                        order_id: order.id,
+                        handler: function (response) {
+                            paymentStatusEl.textContent = "Transaction authorized. Extracting client assets zip download package...";
+                            triggerSecureZipDownload(response.razorpay_payment_id);
+                        },
+                        prefill: { name: "Client Partner", email: "partner@enterprise.io", contact: "9999999999" },
+                        theme: { color: "#4f46e5" }
+                    };
+
+                    const rzp = new Razorpay(options);
+                    rzp.open();
+                } catch (err) {
+                    console.error(err);
+                    paymentStatusEl.textContent = `Payment runtime exception: ${err.message || "Unknown"}`;
+                }
+            });
+
+            async function triggerSecureZipDownload(paymentId) {
+                paymentStatusEl.innerHTML = `<span class="text-emerald-400 font-bold">Paid! Ref: ${paymentId}. Dispatching bundle stream...</span>`;
+                try {
+                    const res = await fetch("/api/generate-zip", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            structure_md: generatedSpecCache.structure_md,
+                            design_md: generatedSpecCache.design_md,
+                            usecase_md: generatedSpecCache.usecase_md,
+                        }),
+                    });
+
+                    if (!res.ok) throw new Error("ZIP generation error.");
+
+                    const blob = await res.blob();
+                    const downloadUrl = URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.href = downloadUrl;
+                    link.download = "webagent_specs_bundle.zip";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(downloadUrl);
+                    paymentStatusEl.textContent = "ZIP archive successfully delivered.";
+                } catch (err) {
+                    console.error(err);
+                    paymentStatusEl.textContent = "ZIP generation error: " + err.message;
+                }
+            }
+        });
+
+        function switchTab(activeTab) {
+            ['structure', 'design', 'usecase'].forEach(tab => {
+                const btn = document.getElementById(`tab-btn-${tab}`);
+                const container = document.getElementById(`canvas-container-${tab}`);
+                if (tab === activeTab) {
+                    btn.className = "px-4 py-2 rounded-lg text-xs font-medium transition-all bg-indigo-600 text-white";
+                    container.classList.remove("hidden");
+                } else {
+                    btn.className = "px-4 py-2 rounded-lg text-xs font-medium transition-all text-slate-400 hover:text-white";
+                    container.classList.add("hidden");
+                }
+            });
+        }
+
+        function renderMarkdownToCanvas(canvasId, text) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext("2d");
+            const lines = text.split("\n");
+            const padding = 24;
+            const width = 760;
+            let currentY = padding;
+
+            canvas.width = width;
+            ctx.font = "14px 'JetBrains Mono', monospace";
+
+            const renderedRowSpecs = [];
+            lines.forEach(line => {
+                let cleanLine = line.trimEnd();
+                let type = "body";
+                if (cleanLine.startsWith("## ")) {
+                    type = "h2";
+                    cleanLine = cleanLine.replace("## ", "");
+                } else if (cleanLine.startsWith("# ")) {
+                    type = "h1";
+                    cleanLine = cleanLine.replace("# ", "");
+                } else if (cleanLine.startsWith("* ") || cleanLine.startsWith("- ")) {
+                    type = "list";
+                    cleanLine = "• " + cleanLine.substring(2);
+                }
+                renderedRowSpecs.push({ type, text: cleanLine });
+            });
+
+            let estimatedHeight = padding * 2;
+            renderedRowSpecs.forEach(row => {
+                if (row.type === "h1") estimatedHeight += 45;
+                else if (row.type === "h2") estimatedHeight += 35;
+                else estimatedHeight += 24;
+            });
+
+            canvas.height = Math.max(estimatedHeight, 500);
+
+            // Context styling paint background configurations
+            ctx.fillStyle = "#020617";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            renderedRowSpecs.forEach(row => {
+                if (row.type === "h1") {
+                    ctx.font = "bold 20px 'Plus Jakarta Sans', sans-serif";
+                    ctx.fillStyle = "#ffffff";
+                    currentY += 30;
+                    ctx.fillText(row.text, padding, currentY);
+                    currentY += 15;
+                } else if (row.type === "h2") {
+                    ctx.font = "bold 16px 'Plus Jakarta Sans', sans-serif";
+                    ctx.fillStyle = "#818cf8";
+                    currentY += 25;
+                    ctx.fillText(row.text, padding, currentY);
+                    currentY += 10;
+                } else if (row.type === "list") {
+                    ctx.font = "13px 'JetBrains Mono', monospace";
+                    ctx.fillStyle = "#34d399";
+                    ctx.fillText("•", padding, currentY + 16);
+                    ctx.fillStyle = "#d1d5db";
+                    ctx.fillText(row.text.substring(2), padding + 15, currentY + 16);
+                    currentY += 24;
+                } else {
+                    ctx.font = "13px 'JetBrains Mono', monospace";
+                    ctx.fillStyle = "#cbd5e1";
+                    if (row.text.includes("**")) {
+                        let parts = row.text.split("**");
+                        let currentX = padding;
+                        parts.forEach((part, index) => {
+                            ctx.font = (index % 2 === 1) ? "bold 13px 'JetBrains Mono', monospace" : "13px 'JetBrains Mono', monospace";
+                            ctx.fillStyle = (index % 2 === 1) ? "#ffffff" : "#cbd5e1";
+                            ctx.fillText(part, currentX, currentY + 16);
+                            currentX += ctx.measureText(part).width;
+                        });
+                    } else {
+                        ctx.fillText(row.text, padding, currentY + 16);
+                    }
+                    currentY += 24;
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
