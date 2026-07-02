@@ -26,11 +26,15 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from public/
-app.use(express.static(path.join(__dirname, "..", "public")));
+// Replace the old __dirname paths with this in node-server/api/index.js:
+const publicPath = path.join(process.cwd(), "public");
+
+// Middleware
+app.use(express.static(publicPath));
 
 // Root route -> index.html
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
 // API: generate specs (proxy to Python backend)
