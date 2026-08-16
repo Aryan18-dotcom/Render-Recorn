@@ -10,22 +10,22 @@
     <!-- Primary SEO title -->
     <title>Render Recorn – Reverse Engineer Any Website Frontend into Specs</title>
 
-    <!-- Meta description: keep ~50–160 chars -->
+    <!-- Meta description -->
     <meta name="description"
         content="Render Recorn converts any website URL into structured architecture, design tokens, and usecase specs for developers and product teams." />
 
-    <!-- Primary keyword / topic (not very important for Google, but harmless) -->
+    <!-- Primary keyword / topic -->
     <meta name="keywords"
         content="website reverse engineering, frontend blueprint, UI specs generator, architecture markdown, design tokens, usecase matrix" />
 
-    <!-- Canonical URL (update to your real production URL) -->
-    <link rel="canonical" href="https://www.RenderRecorn/" />
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://render-recorn.vercel.app/" />
 
-    <!-- Robots: index and follow (default, but explicit is fine) -->
+    <!-- Robots -->
     <meta name="robots" content="index,follow" />
     <meta name="googlebot" content="index,follow" />
 
-    <!-- Language and author (optional but nice) -->
+    <!-- Language and author -->
     <meta name="language" content="en" />
     <meta name="author" content="Aryan Chheda" />
 
@@ -35,8 +35,7 @@
     <meta property="og:title" content="Render Recorn – Reverse-Engineer Any Website Frontend" />
     <meta property="og:description"
         content="Paste a URL and get production-ready markdown specs: structure.md, design.md, and usecase.md." />
-    <meta property="og:url" content="https://www.RenderRecorn/" />
-    <!-- Update this to a real absolute image URL (1200x630 recommended) -->
+    <meta property="og:url" content="https://render-recorn.vercel.app/" />
     <meta property="og:image" content="./Og-Image.png" />
 
     <!-- Twitter Cards -->
@@ -50,31 +49,31 @@
     <!-- Theme color for mobile address bar -->
     <meta name="theme-color" content="#05080f" />
 
-    <!-- Favicon / app icons (update hrefs to match your build) -->
+    <!-- Favicon / app icons -->
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon.svg" />
     <link rel="apple-touch-icon" sizes="180x180" href="./favicon.svg" />
 
     <!-- Basic JSON-LD schema for a SaaS product -->
     <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Render Recorn",
-    "operatingSystem": "Web",
-    "applicationCategory": "DeveloperApplication",
-    "description": "Render Recorn reverse-engineers any public website frontend into structured specifications: structure, design tokens, and usecase flows.",
-    "url": "https://www.RenderRecorn/",
-    "image": "./Og-Image.png",
-    "offers": {
-      "@type": "Offer",
-      "price": "1000.00",
-      "priceCurrency": "INR"
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Render Recorn",
+      "operatingSystem": "Web",
+      "applicationCategory": "DeveloperApplication",
+      "description": "Render Recorn reverse-engineers any public website frontend into structured specifications: structure, design tokens, and usecase flows.",
+      "url": "https://render-recorn.vercel.app/",
+      "image": "./Og-Image.png",
+      "offers": {
+        "@type": "Offer",
+        "price": "1000.00",
+        "priceCurrency": "INR"
+      }
     }
-  }
-  </script>
+    </script>
 
-    <!-- Tailwind + fonts + scripts (your existing ones) -->
+    <!-- Tailwind + Fonts + Scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -169,8 +168,7 @@
 
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div class="absolute -top-[40%] -left-[20%] w-[80vw] h-[80vw] bg-indigo-900/15 rounded-full blur-[120px]"></div>
-        <div class="absolute -bottom-[30%] -right-[10%] w-[70vw] h-[70vw] bg-emerald-900/10 rounded-full blur-[120px]">
-        </div>
+        <div class="absolute -bottom-[30%] -right-[10%] w-[70vw] h-[70vw] bg-emerald-900/10 rounded-full blur-[120px]"></div>
     </div>
 
     <header class="glass-nav sticky top-0 left-0 right-0 z-50 h-16 flex-shrink-0">
@@ -196,6 +194,7 @@
 
     <main class="flex-1 min-h-0 relative z-10 overflow-hidden">
 
+        <!-- LANDING VIEW -->
         <section id="view-landing"
             class="h-full max-w-7xl mx-auto px-4 py-4 md:py-8 flex flex-col lg:flex-row items-center gap-8 overflow-hidden">
             <div class="flex-1 space-y-4 min-w-0">
@@ -227,7 +226,7 @@
                         <input type="url" id="target-url" name="target-url" placeholder="https://example.com" required
                             class="w-full bg-transparent border-0 outline-none focus:ring-0 text-white placeholder-slate-500 px-3 py-2 text-sm sm:text-base" />
                         <button type="submit" id="generate-btn"
-                            class="glow-effect bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs text-sm px-4 sm:px-6 py-2.5 rounded-xl transition-all shadow-lg shadow-indigo-600/20 whitespace-nowrap ml-2">
+                            class="glow-effect bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs sm:text-sm px-4 sm:px-6 py-2.5 rounded-xl transition-all shadow-lg shadow-indigo-600/20 whitespace-nowrap ml-2">
                             Create One Now!
                         </button>
                     </div>
@@ -274,6 +273,7 @@
             </div>
         </section>
 
+        <!-- PROCESSING VIEW -->
         <section id="view-processing"
             class="hidden fixed inset-0 z-50 bg-darkBg flex flex-col items-center justify-center p-6">
             <div class="max-w-lg w-full text-center space-y-6">
@@ -308,9 +308,9 @@
             </div>
         </section>
 
+        <!-- RESULTS VIEW -->
         <section id="view-results"
             class="hidden h-full max-w-7xl mx-auto px-4 py-4 flex flex-col gap-3 overflow-hidden">
-            <!-- Header -->
             <div class="flex items-center justify-between border-b border-white/5 pb-2 flex-shrink-0">
                 <div class="min-w-0">
                     <h2 class="text-xl font-bold text-white tracking-tight truncate">
@@ -326,11 +326,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 15v2m0 0v2m0-2h2m-2 0H10m3.5-6.538a2.42 2.42 0 010 3.414l-6.264 6.264a2 2 0 01-.707.414l-3.364.841a.5.5 0 01-.607-.607l.841-3.364a2 2 0 01.414-.707l6.264-6.264a2 2 0 013.414 0z" />
                     </svg>
-                    Selection & Clipboard Protections Enabled
+                    Selection &amp; Clipboard Protections Enabled
                 </div>
             </div>
 
-            <!-- Tabs + Pay button row -->
             <div
                 class="flex flex-col md:flex-row items-stretch md:items-center md:justify-between gap-2 p-1 rounded-xl glass-panel border-white/5 text-xs flex-shrink-0 w-full">
                 <div class="flex items-center justify-center gap-2 w-full md:w-auto">
@@ -349,13 +348,13 @@
                 </div>
 
                 <button id="upgrade-btn"
-                    class="glow-effect bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm px-6 py-2 rounded-xl transition-all shadow-lg shadow-emerald-600/20 w-full md:w-60 lg:w-fit">
+                    class="glow-effect bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm px-6 py-2 rounded-xl transition-all shadow-lg shadow-emerald-600/20 w-full md:w-60 lg:w-fit cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
                     Pay ₹1,000 &amp; Download ZIP
                 </button>
             </div>
-            <p class="text-[10px] font-mono text-slate-500" id="payment-status">Payment status will be displayed here.
-            </p>
-            <!-- Canvas area -->
+            
+            <p class="text-[10px] font-mono text-slate-500" id="payment-status">Ready for export authorization.</p>
+
             <div class="glass-panel rounded-2xl p-4 border-white/10 flex-1 min-h-0 relative">
                 <div id="canvas-container-structure"
                     class="canvas-container w-full h-full overflow-auto bg-slate-950/60 rounded-xl p-4 border border-black/40">
@@ -402,6 +401,7 @@
                 runLiveLogSequence();
 
                 try {
+                    // Send crawl request to Node backend proxy route
                     const res = await fetch("/api/generate", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
@@ -414,8 +414,7 @@
                         const message = (data && (data.error || data.details)) || `Downstream gateway error (${res.status})`;
                         statusMsg.textContent = `Pipeline fault: ${message}`;
                         setTimeout(() => {
-                            alert("Critical operational parsing layout exception occurred: " + message);
-                            // window.location.reload();
+                            alert("Critical operational parsing exception: " + message);
                         }, 1000);
                         return;
                     }
@@ -442,10 +441,6 @@
                 } catch (err) {
                     console.error(err);
                     statusMsg.textContent = "Unexpected runtime exception occurred.";
-                    setTimeout(() => {
-                        alert("Critical operational parsing layout exception occurred: " + (err.message || "Unknown"));
-                        window.location.reload();
-                    }, 1200);
                 }
             });
 
@@ -469,45 +464,88 @@
                 });
             }
 
+            // RAZORPAY INTEGRATION + VERIFICATION
             upgradeBtn.addEventListener("click", async () => {
-                paymentStatusEl.textContent = "Negotiating handshake routing parameters...";
+                paymentStatusEl.innerHTML = `<span class="text-indigo-400">Initializing transaction parameters...</span>`;
+                upgradeBtn.disabled = true;
+
                 try {
-                    const res = await fetch("/api/create-order", {
+                    // Step 1: Create Order via Node API
+                    const orderRes = await fetch("/api/create-order", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ amount: 100000, currency: "INR" }),
                     });
 
-                    const order = await res.json().catch(() => null);
-                    if (!res.ok || !order) {
-                        throw new Error((order && order.error) || "Order signature response generation failed.");
+                    const order = await orderRes.json().catch(() => null);
+
+                    if (!orderRes.ok || !order?.id) {
+                        throw new Error((order && order.error) || "Failed to generate Razorpay order.");
                     }
 
+                    // Step 2: Open Razorpay Checkout Modal
                     const options = {
                         key: order.keyId,
                         amount: order.amount,
                         currency: order.currency,
-                        name: "Render Recorn Pro Bundle",
-                        description: "Offline Specifications Zip Download Pack",
+                        name: "Render Recorn",
+                        description: "Engineering Specs Bundle (structure, design, usecase)",
                         order_id: order.id,
-                        handler: function (response) {
-                            paymentStatusEl.textContent = "Transaction authorized. Extracting client assets zip download package...";
-                            triggerSecureZipDownload(response.razorpay_payment_id);
+                        theme: { color: "#4f46e5" },
+                        modal: {
+                            ondismiss: function () {
+                                paymentStatusEl.innerHTML = `<span class="text-amber-400">Payment cancelled by user.</span>`;
+                                upgradeBtn.disabled = false;
+                            }
                         },
-                        prefill: { name: "Client Partner", email: "partner@enterprise.io", contact: "9999999999" },
-                        theme: { color: "#4f46e5" }
+                        handler: async function (response) {
+                            paymentStatusEl.innerHTML = `<span class="text-indigo-400 animate-pulse">Verifying cryptographic payment signature...</span>`;
+
+                            try {
+                                // Step 3: Verify HMAC Signature on Backend
+                                const verifyRes = await fetch("/api/verify-payment", {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify({
+                                        razorpay_order_id: response.razorpay_order_id,
+                                        razorpay_payment_id: response.razorpay_payment_id,
+                                        razorpay_signature: response.razorpay_signature,
+                                    }),
+                                });
+
+                                const verifyData = await verifyRes.json();
+
+                                if (!verifyRes.ok || !verifyData.verified) {
+                                    throw new Error(verifyData.error || "Payment signature mismatch.");
+                                }
+
+                                // Step 4: Trigger Secure ZIP Download
+                                await triggerSecureZipDownload(response.razorpay_payment_id);
+                            } catch (verifyErr) {
+                                console.error(verifyErr);
+                                paymentStatusEl.innerHTML = `<span class="text-red-400">Signature verification failed: ${verifyErr.message}</span>`;
+                                upgradeBtn.disabled = false;
+                            }
+                        }
                     };
 
                     const rzp = new Razorpay(options);
+                    rzp.on("payment.failed", function (response) {
+                        paymentStatusEl.innerHTML = `<span class="text-red-400">Payment failed: ${response.error.description}</span>`;
+                        upgradeBtn.disabled = false;
+                    });
+
                     rzp.open();
                 } catch (err) {
                     console.error(err);
-                    paymentStatusEl.textContent = `Payment runtime exception: ${err.message || "Unknown"}`;
+                    paymentStatusEl.innerHTML = `<span class="text-red-400">Gateway error: ${err.message || "Unknown"}</span>`;
+                    upgradeBtn.disabled = false;
                 }
             });
 
             async function triggerSecureZipDownload(paymentId) {
-                paymentStatusEl.innerHTML = `<span class="text-emerald-400 font-bold">Paid! Ref: ${paymentId}. Dispatching bundle stream...</span>`;
+                paymentStatusEl.innerHTML = `<span class="text-emerald-400 font-semibold">Payment Verified (ID: ${paymentId}). Compiling archive...</span>`;
+
                 try {
                     const res = await fetch("/api/generate-zip", {
                         method: "POST",
@@ -519,21 +557,25 @@
                         }),
                     });
 
-                    if (!res.ok) throw new Error("ZIP generation error.");
+                    if (!res.ok) throw new Error("ZIP generation pipeline failed.");
 
                     const blob = await res.blob();
                     const downloadUrl = URL.createObjectURL(blob);
                     const link = document.createElement("a");
                     link.href = downloadUrl;
-                    link.download = "webagent_specs_bundle.zip";
+                    link.download = `render_recorn_specs_${Date.now()}.zip`;
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
                     URL.revokeObjectURL(downloadUrl);
-                    paymentStatusEl.textContent = "ZIP archive successfully delivered.";
+
+                    paymentStatusEl.innerHTML = `<span class="text-emerald-400 font-bold">✓ Archive package delivered.</span>`;
+                    upgradeBtn.textContent = "Downloaded ✓";
+                    upgradeBtn.classList.replace("bg-emerald-600", "bg-slate-700");
                 } catch (err) {
                     console.error(err);
-                    paymentStatusEl.textContent = "ZIP generation error: " + err.message;
+                    paymentStatusEl.innerHTML = `<span class="text-red-400">Download dispatch failed: ${err.message}</span>`;
+                    upgradeBtn.disabled = false;
                 }
             }
         });
@@ -589,7 +631,6 @@
 
             canvas.height = Math.max(estimatedHeight, 500);
 
-            // Context styling paint background configurations
             ctx.fillStyle = "#020617";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
