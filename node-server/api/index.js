@@ -161,3 +161,5 @@ if (process.env.VERCEL !== "1") {
     console.log(`Express server running on http://localhost:${port}`);
   });
 }
+
+export default app;
