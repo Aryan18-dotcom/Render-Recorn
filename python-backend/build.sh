@@ -2,8 +2,11 @@
 # exit on error
 set -o errexit
 
-# 1. Standard python packages setup
+# 1. Ensure the browser path is consistent
+export PLAYWRIGHT_BROWSERS_PATH=/opt/render/project/src/.local-browsers
+
+# 2. Install Python packages
 pip install -r requirements.txt
 
-# 2. Install full browser suite (includes the required chrome-headless-shell)
-python -m playwright install
+# 3. Install Chromium and its Linux system libraries
+python -m playwright install --with-deps chromium
