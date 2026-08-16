@@ -1,5 +1,7 @@
 # api_server.py
+import sys
 import asyncio
+import os
 import logging
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -110,3 +112,9 @@ async def generate_docs(req: GenerateRequest):
             status_code=500,
             detail="Internal error while processing the target URL. Please try again later."
         )
+
+if __name__ == "__main__":
+    import uvicorn
+    if sys.platform == "win32":
+        asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+    uvicorn.run("api_server:app", host="0.0.0.0", port=8000, reload=True)

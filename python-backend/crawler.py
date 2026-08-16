@@ -1,5 +1,6 @@
 from urllib.parse import urlparse, urljoin
-from playwright.async_api import async_playwright
+from playwright.sync_api import sync_playwright
+import asyncio
 
 
 class WebCrawler:
@@ -13,11 +14,11 @@ class WebCrawler:
     def is_same_domain(self, url):
         return urlparse(url).netloc == self.domain
 
-    async def crawl(self):
+    def _sync_crawl(self):
         pages_data = {}
-        async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True)
-            context = await browser.new_context(
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            context = browser.new_context(
                 user_agent=(
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                     "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -25,7 +26,7 @@ class WebCrawler:
                 ),
                 viewport={"width": 1440, "height": 900},
             )
-            page = await context.new_page()
+            page = context.new_page()
 
             while self.urls_to_visit and len(self.visited_urls) < self.max_pages:
                 current_url = self.urls_to_visit.pop(0)
@@ -34,15 +35,15 @@ class WebCrawler:
 
                 print(f"[Crawler] Parsing Path: {current_url}")
                 try:
-                    await page.goto(
+                    page.goto(
                         current_url, wait_until="domcontentloaded", timeout=15000
                     )
-                    await page.wait_for_timeout(2500)
+                    page.wait_for_timeout(2500)
 
-                    html = await page.content()
+                    html = page.content()
 
-                    # Core Telemetry Extraction: direct facts from the browser window
-                    telemetry_data = await page.evaluate(
+                    # Core Telemetry Extraction
+                    telemetry_data = page.evaluate(
                         """() => {
                         const allElems = Array.from(document.querySelectorAll('*'));
                         const rawImages = Array.from(document.querySelectorAll('img, svg, picture'));
@@ -84,7 +85,7 @@ class WebCrawler:
 
                     self.visited_urls.add(current_url)
 
-                    hrefs = await page.eval_on_selector_all(
+                    hrefs = page.eval_on_selector_all(
                         "a", "elements => elements.map(e => e.href)"
                     )
                     for href in hrefs:
@@ -103,7 +104,11 @@ class WebCrawler:
                 except Exception as e:
                     print(f"[Error] Skipping route target {current_url}: {e}")
 
-            await context.close()
-            await browser.close()
+            context.close()
+            browser.close()
 
         return pages_data
+
+    async def crawl(self):
+        # Runs the synchronous Playwright crawler in a separate worker thread
+        return await asyncio.to_thread(self._sync_crawl)
