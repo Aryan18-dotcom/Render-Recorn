@@ -1,3 +1,9 @@
+import os
+import sys
+
+if sys.platform != "win32":
+    os.environ["PLAYWRIGHT_BROWSERS_PATH"] = "/opt/render/project/src/.local-browsers"
+
 from urllib.parse import urlparse, urljoin
 from playwright.sync_api import sync_playwright
 import asyncio
