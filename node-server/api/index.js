@@ -45,11 +45,15 @@ app.post("/api/generate", async (req, res) => {
       return res.status(400).json({ error: "target_url is required" });
     }
 
+    console.log("[Node API] /api/generate called with target_url:", target_url);
+
     const response = await fetch(`${PYTHON_API_BASE}/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ target_url }),
     });
+
+    console.log("[Node API] /api/generate response status:", response);
 
     if (!response.ok) {
       const text = await response.text();
